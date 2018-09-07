@@ -5,7 +5,7 @@ var MyApp ={
 };
 
 
-
+console.log("gdsg")
 function getAllClients() {
     MyApp.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     MyApp.myHeaders = new Headers({
