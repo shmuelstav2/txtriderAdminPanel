@@ -2,7 +2,7 @@
 var MyApp ={
     currentUser: undefined,
     myHeaders: undefined,
-    baseUrl:"http://txtrider.co/"
+    baseUrl:"http://localhost/"
 };
 
 
