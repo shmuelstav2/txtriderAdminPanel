@@ -1,7 +1,8 @@
 
 var MyApp ={
     currentUser: undefined,
-    myHeaders: undefined
+    myHeaders: undefined,
+    baseUrl:"http://txtrider.co/"
 };
 
 
@@ -12,7 +13,7 @@ function getAllClients() {
         'Authorization': 'Bearer ' + MyApp.currentUser.token
     });
 
-    return fetch('http://localhost/api/admin/users', {
+    return fetch(MyApp.baseUrl+'api/admin/users', {
         method: 'GET',
         headers: MyApp.myHeaders,
     })
@@ -80,7 +81,7 @@ function drawRow(rowData) {
     row.append($("<td>" +toDate(rowData.date_registered) + "</td>"));
     row.append($("<td>" + rowData.websites.length + "</td>"));
 
-    fetch('http://localhost/api/admin/campaign/'+rowData._id, {
+    fetch(MyApp.baseUrl+'api/admin/campaign/'+rowData._id, {
         method: 'GET',
         headers: MyApp.myHeaders,
     })
