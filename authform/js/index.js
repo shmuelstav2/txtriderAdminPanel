@@ -77,7 +77,7 @@
      console.log("Change view Login success")
      $('form').fadeOut(500);
      $('.wrapper').addClass('form-success');
-     window.location.href = "http://localhost/ad/adminpanel.html";
+     window.location.href = "../../ad/adminpanel/adminpanel.html";
  }
 
 

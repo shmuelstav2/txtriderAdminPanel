@@ -1,3 +1,54 @@
+$(document).ready(function(){
+
+    $("#clicktest1").click(function () {
+
+
+    })
+
+
+    $(document).on('click', '[data-lightbox]', lity);
+    $('.lity-close').click(function(){console.log("dvdsv");});
+    $( '.lity-close' ).hover(
+        function() {
+            console.log( "hover" );
+        })
+    $(document).on('lity:close', function(event, instance) {
+        //localStorage.setItem('', localStorage.currentUser);
+        localStorage.setItem('currentUser', localStorage.currentAdmin);
+    });
+
+    $(document).on('lity:open', function(event, instance) {
+        console.log('Lightbox opened');
+    });
+
+    $(".iframeLink").click(function () {
+        console.log('iframe link');
+        console.log(this.value);
+        fetch(MyApp.baseUrl+'api/admin/userlogin/'+this.value, {
+            method: 'POST',
+            headers: MyApp.myHeaders,
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    response.json().then(function(user) {
+                        localStorage.setItem('currentAdmin', localStorage.currentUser);
+                        localStorage.setItem('currentUser', JSON.stringify(user));
+                        var instance = lity('http://localhost/admin/index');
+                    })
+                }
+                else {
+                    throw new Error('Something went wrong on api server!');
+                }
+            })
+            .then(response => {
+                console.debug(response);
+            }).catch(error => {
+            console.log(error);
+        });
+    })
+});
+
+
 
 var MyApp ={
     currentUser: undefined,
@@ -6,7 +57,7 @@ var MyApp ={
 };
 
 
-function getAllClients() {
+function getAllUsers() {
     MyApp.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     MyApp.myHeaders = new Headers({
         'Content-Type': 'application/json',
@@ -35,11 +86,10 @@ function getAllClients() {
         .then(response => {
             console.debug(response);
         }).catch(error => {
-            console.error(error);
+            console.log(error);
         });
 }
 
-getAllClients();
 
 
 function drawTable(data) {
@@ -73,11 +123,12 @@ function toDate(dateStr) {
 
     return (dt+'-' + month + '-'+year);
 }
+
 function drawRow(rowData) {
     var row = $("<tr />")
     $("#personDataTable").append(row);
     row.append($("<td>" + rowData._id + "</td>"));
-    row.append($("<td>" + rowData.email + "</td>"));
+    row.append($("<td>" + '<button class="iframeLink" name="subject" type="submit" value='+rowData._id+'>'+rowData.email+'</button>' + "</td>"));
     row.append($("<td>" +toDate(rowData.date_registered) + "</td>"));
     row.append($("<td>" + rowData.websites.length + "</td>"));
 
@@ -104,5 +155,6 @@ function drawRow(rowData) {
         }).catch(error => {
         console.error(error);
     });
-
 }
+
+getAllUsers();
