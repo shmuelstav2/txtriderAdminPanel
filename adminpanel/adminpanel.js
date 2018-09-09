@@ -1,24 +1,19 @@
+
+
+var MyApp ={
+    currentUser: undefined,
+    myHeaders: undefined,
+    baseUrl:"http://localhost/"
+};
+
 $(document).ready(function(){
-
-    $("#clicktest1").click(function () {
-
-
-    })
-
-
+    /*************************************************
+     *                  Open iframes
+     *************************************************/
     $(document).on('click', '[data-lightbox]', lity);
-    $('.lity-close').click(function(){console.log("dvdsv");});
-    $( '.lity-close' ).hover(
-        function() {
-            console.log( "hover" );
-        })
     $(document).on('lity:close', function(event, instance) {
         //localStorage.setItem('', localStorage.currentUser);
         localStorage.setItem('currentUser', localStorage.currentAdmin);
-    });
-
-    $(document).on('lity:open', function(event, instance) {
-        console.log('Lightbox opened');
     });
 
     $(".iframeLink").click(function () {
@@ -33,7 +28,7 @@ $(document).ready(function(){
                     response.json().then(function(user) {
                         localStorage.setItem('currentAdmin', localStorage.currentUser);
                         localStorage.setItem('currentUser', JSON.stringify(user));
-                        var instance = lity('http://localhost/admin/index');
+                        var instance = lity(MyApp.baseUrl+'admin/index');
                     })
                 }
                 else {
@@ -46,15 +41,13 @@ $(document).ready(function(){
             console.log(error);
         });
     })
+
+
+    /*************************************************
+     *         end Open iframes
+     *************************************************/
 });
 
-
-
-var MyApp ={
-    currentUser: undefined,
-    myHeaders: undefined,
-    baseUrl:"http://localhost/"
-};
 
 
 function getAllUsers() {
