@@ -15,35 +15,6 @@ $(document).ready(function(){
         //localStorage.setItem('', localStorage.currentUser);
         localStorage.setItem('currentUser', localStorage.currentAdmin);
     });
-
-    $(".iframeLink").click(function () {
-        console.log("fdsf")
-        console.log('iframe link');
-        console.log(this.value);
-        fetch(MyApp.baseUrl+'api/admin/userlogin/'+this.value, {
-            method: 'POST',
-            headers: MyApp.myHeaders,
-        })
-            .then(response => {
-                if (response.status === 200) {
-                    response.json().then(function(user) {
-                        localStorage.setItem('currentAdmin', localStorage.currentUser);
-                        localStorage.setItem('currentUser', JSON.stringify(user));
-                        var instance = lity(MyApp.baseUrl+'admin/index');
-                    })
-                }
-                else {
-                    throw new Error('Something went wrong on api server!');
-                }
-            })
-            .then(response => {
-                console.debug(response);
-            }).catch(error => {
-            console.log(error);
-        });
-    })
-
-
     /*************************************************
      *         end Open iframes
      *************************************************/
@@ -117,12 +88,40 @@ function toDate(dateStr) {
 
     return (dt+'-' + month + '-'+year);
 }
+function openIframe(id) {
+    console.log("fdsf")
+    console.log('iframe link');
+    console.log(this.value);
+    fetch(MyApp.baseUrl+'api/admin/userlogin/'+id, {
+        method: 'POST',
+        headers: MyApp.myHeaders,
+    })
+        .then(response => {
+            if (response.status === 200) {
+                response.json().then(function(user) {
+                    console.log(user)
+                    localStorage.setItem('currentAdmin', localStorage.currentUser);
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    var instance = lity(MyApp.baseUrl+'admin/index');
+                })
+            }
+            else {
+                throw new Error('Something went wrong on api server!');
+            }
+        })
+        .then(response => {
+            console.debug(response);
+        }).catch(error => {
+        console.log(error);
+    });
+}
+
 
 function drawRow(rowData) {
     var row = $("<tr />")
     $("#personDataTable").append(row);
     row.append($("<td>" + rowData._id + "</td>"));
-    row.append($("<td>" + '<button class="iframeLink" name="subject" type="submit" value='+rowData._id+'>'+rowData.email+'</button>' + "</td>"));
+    row.append($("<td>" + '<button onclick=openIframe("'+rowData._id+'") class="iframeLink" name="subject" type="submit" value='+rowData._id+'>'+rowData.email+'</button>' + "</td>"));
     row.append($("<td>" +toDate(rowData.date_registered) + "</td>"));
     row.append($("<td>" + rowData.websites.length + "</td>"));
 
@@ -133,7 +132,7 @@ function drawRow(rowData) {
         .then(response => {
             if (response.status === 200) {
                 response.json().then(function(data) {
-                    console.log(data)
+                    //console.log(data)
                     row.append($("<td>" + data.result.length + "</td>"));
                     row.append($("<td>" +  sumKw(data.result) + "</td>"));
                   //  drawTable(data);
