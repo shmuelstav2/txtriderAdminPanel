@@ -3,7 +3,7 @@
 var MyApp ={
     currentUser: undefined,
     myHeaders: undefined,
-    baseUrl:"http://txtrider.co/"
+    baseUrl:"http://localhost/"
 };
 
 
@@ -82,7 +82,7 @@ $("#login-button").click(function(event) {
      console.log("Change view Login success")
      $('form').fadeOut(500);
      $('.wrapper').addClass('form-success');
-     window.location.href = "../../ad/adminpanel/adminpanel.html";
+     window.location.href = "../../txtriderAdminPanel/adminpanel/adminpanel.html";
  }
 
 
