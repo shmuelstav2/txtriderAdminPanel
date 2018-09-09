@@ -17,6 +17,7 @@ $(document).ready(function(){
     });
 
     $(".iframeLink").click(function () {
+        console.log("fdsf")
         console.log('iframe link');
         console.log(this.value);
         fetch(MyApp.baseUrl+'api/admin/userlogin/'+this.value, {
