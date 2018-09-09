@@ -1,5 +1,5 @@
 
-console.log("regfrew")
+
 var MyApp ={
     currentUser: undefined,
     myHeaders: undefined,
@@ -82,7 +82,7 @@ $("#login-button").click(function(event) {
      console.log("Change view Login success")
      $('form').fadeOut(500);
      $('.wrapper').addClass('form-success');
-     window.location.href = "../../ad/adminpanel/adminpanel.html";
+     window.location.href = "../../txtriderAdminPanel/adminpanel/adminpanel.html";
  }
 
 
