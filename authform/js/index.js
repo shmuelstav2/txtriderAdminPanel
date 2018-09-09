@@ -1,5 +1,5 @@
 
-
+console.log("regfrew")
 var MyApp ={
     currentUser: undefined,
     myHeaders: undefined,
