@@ -1,8 +1,6 @@
  $("#login-button").click(function(event) {
 
      event.preventDefault();
-
-
      /********************************************\
       *             get authentication data
       ********************************************/

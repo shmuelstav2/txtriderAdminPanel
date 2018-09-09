@@ -3,7 +3,7 @@
 var MyApp ={
     currentUser: undefined,
     myHeaders: undefined,
-    baseUrl:"http://localhost/"
+    baseUrl:"http://txtrider.co/"
 };
 
 $(document).ready(function(){
