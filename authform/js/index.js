@@ -1,8 +1,15 @@
- $("#login-button").click(function(event) {
+
+
+var MyApp ={
+    currentUser: undefined,
+    myHeaders: undefined,
+    baseUrl:"http://localhost/"
+};
+
+
+$("#login-button").click(function(event) {
 
      event.preventDefault();
-
-
      /********************************************\
       *             get authentication data
       ********************************************/
@@ -30,12 +37,10 @@
          return;
      }
 
-
-
      /********************************************\
       *             check login with the server
       ********************************************/
-     fetch("http://localhost/api/publisher/auth/login",
+     fetch(MyApp.baseUrl+'api/publisher/auth/login',
          {
              headers: {
                  'Accept': 'application/json',
